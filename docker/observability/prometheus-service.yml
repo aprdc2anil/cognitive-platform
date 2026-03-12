@@ -1,0 +1,21 @@
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: cognitive-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - ${HOST_VOLUMES_PATH}/prometheus:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus-config.yml"
+    networks:
+      - cognitive-network
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

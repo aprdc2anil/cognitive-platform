@@ -1,0 +1,8 @@
+include:
+  - infra/postgres.yml
+  - infra/redis.yml
+  - observability/prometheus-service.yml
+  - observability/grafana.yml
+
+networks:
+  cognitive-network:

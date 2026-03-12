@@ -1,0 +1,33 @@
+services:
+  redis:
+    image: redis:7
+    container_name: cognitive-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ${HOST_VOLUMES_PATH}/redis:/data
+    networks:
+      - cognitive-network
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis-exporter:
+    image: oliver006/redis_exporter
+    container_name: cognitive-redis-exporter
+    restart: unless-stopped
+    environment:
+      REDIS_ADDR: redis:6379
+    ports:
+      - "9121:9121"
+    networks:
+      - cognitive-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

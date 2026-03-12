@@ -326,8 +326,10 @@ volumes:
 
 Start infrastructure:
 
+> Note: The docker-compose file was split into a structured layout under `docker/`. See Phase 2 - Stage 8 for details on the split.
+
 ``` bash
-docker compose up -d
+docker compose -f docker/cognitive-compose.yml --env-file .env up -d
 ```
 
 Verify containers:

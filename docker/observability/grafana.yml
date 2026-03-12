@@ -1,0 +1,16 @@
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: cognitive-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${HOST_VOLUMES_PATH}/grafana:/var/lib/grafana
+    networks:
+      - cognitive-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
